@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #fafafa;
+}
+
+main {
+  padding: 20px 22px 18px;
+  min-width: 360px;
+  max-width: 440px;
+}
+
+.progress-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+}
+
+.progress-brand h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.progress-brand img {
+  border-radius: 7px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.progress-title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+.status {
+  margin: 0 0 10px;
+  line-height: 1.4;
+  min-height: 2.6em;
+}
+
+.bar-wrap {
+  height: 10px;
+  border-radius: 6px;
+  background: #e8eaed;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #1a73e8, #4285f4);
+  transition: width 0.2s ease-out;
+}
+
+.detail {
+  margin: 0 0 12px;
+  font-size: 12px;
+  color: #5f6368;
+  word-break: break-word;
+}
+
+.hint {
+  margin: 0 0 14px;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.45;
+}
+
+.close-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #f5f5f5;
+}

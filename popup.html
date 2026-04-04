@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tabby</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header class="app-header">
+        <img class="app-logo" src="icons/icon48.png" width="40" height="40" alt="" />
+        <div class="app-header-text">
+          <h1>Tabby</h1>
+          <p class="tagline">Tabs, tidied.</p>
+        </div>
+      </header>
+      <p class="hint">
+        Duplicates are matched by full URL (scheme, host, path, query). The
+        first tab in each group is kept (by window, then tab order).
+      </p>
+      <section id="analytics" class="analytics" aria-label="Tab statistics">
+        <h2 class="analytics-title">Current tabs</h2>
+        <dl class="analytics-grid">
+          <dt>Tab count <span class="sub">(excl. chrome://)</span></dt>
+          <dd data-stat="totalTabs">—</dd>
+          <dt>Unique URLs</dt>
+          <dd data-stat="uniqueUrls">—</dd>
+          <dt>Duplicate tabs <span class="sub">(would close)</span></dt>
+          <dd data-stat="duplicateTabs">—</dd>
+          <dt>Duplicate groups</dt>
+          <dd data-stat="duplicateGroups">—</dd>
+        </dl>
+      </section>
+      <div class="actions">
+        <button type="button" id="closeDupes" class="primary">
+          Close duplicate tabs
+        </button>
+        <button type="button" id="exportLinks">Export all tab links (.txt)</button>
+      </div>
+      <div id="bothRow" class="actions">
+        <button type="button" id="closeAndExport" class="secondary">
+          Close duplicates &amp; export unique links
+        </button>
+      </div>
+      <section class="organize" aria-label="Organize tabs by metadata category">
+        <h2 class="organize-title">Organize by category (metadata)</h2>
+        <p class="organize-hint">
+          Reads Open Graph, JSON-LD, and hostname hints; groups by category.
+          Large categories are split across windows (see per-window cap in
+          <code>limits.js</code>). Large applies are split into automatic batches (see
+          <code>limits.js</code>). Pinned and
+          <code>chrome://</code> tabs are skipped. On first preview, Chrome may ask for
+          <strong>optional</strong> site access so Tabby can read metadata on your tabs; if you
+          decline, classification uses URL signals only.
+        </p>
+        <div class="actions">
+          <button type="button" id="previewOrganize" class="secondary">
+            Preview layout (before / after)
+          </button>
+        </div>
+        <div id="organizePreview" class="organize-preview hidden" hidden>
+          <div id="organizeBefore" class="organize-block"></div>
+          <div id="organizeAfter" class="organize-block"></div>
+          <div id="organizeGroups" class="organize-groups"></div>
+          <div id="organizeBatchHint" class="organize-batch-hint hidden" hidden></div>
+          <div class="actions organize-apply-row">
+            <button type="button" id="applyOrganize" class="primary">
+              Apply — move tabs
+            </button>
+            <button type="button" id="cancelOrganizePreview" class="secondary">
+              Dismiss preview
+            </button>
+          </div>
+        </div>
+      </section>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </main>
+    <script src="limits.js"></script>
+    <script src="classify.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tabby — organizing</title>
+    <link rel="stylesheet" href="progress.css" />
+  </head>
+  <body>
+    <main>
+      <header class="progress-brand">
+        <img src="icons/icon32.png" width="28" height="28" alt="" />
+        <h1>Tabby</h1>
+      </header>
+      <h2 class="progress-title">Organizing tabs</h2>
+      <p id="status" class="status">Starting…</p>
+      <div class="bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="barWrap">
+        <div id="barFill" class="bar-fill"></div>
+      </div>
+      <p id="detail" class="detail"></p>
+      <p class="hint">
+        Work runs in the background. Starting <strong>Apply</strong> again from the extension cancels the
+        previous run and queues the new one (only one apply at a time).
+      </p>
+      <button type="button" id="closeBtn" class="close-btn" hidden>Close</button>
+    </main>
+    <script src="progress.js"></script>
+  </body>
+</html>
