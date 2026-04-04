@@ -3,6 +3,75 @@ importScripts("limits.js");
 /** Serialize applies so only one runs at a time; newer runId cancels the previous loop. */
 let applyChain = Promise.resolve();
 
+/** Debounce badge updates (tabs fire many events while loading). */
+let badgeRefreshTimer = null;
+
+/**
+ * Same scope as popup "Tab count (excl. chrome://)": real tabs with a URL, not chrome:// pages.
+ * @returns {Promise<number>}
+ */
+async function getTabCountForBadge() {
+  const tabs = await chrome.tabs.query({});
+  return tabs.filter((t) => t.id != null && t.url && !t.url.startsWith("chrome://")).length;
+}
+
+/**
+ * Badge text max 4 UTF-16 units (Chrome). Compact large counts.
+ * @param {number} n
+ * @returns {string}
+ */
+function formatBadgeCount(n) {
+  if (n < 0) return "";
+  if (n === 0) return "0";
+  if (n < 10000) return String(n);
+  if (n < 1000000) return `${Math.floor(n / 1000)}k`;
+  return "999k";
+}
+
+async function refreshTabCountBadge() {
+  try {
+    const n = await getTabCountForBadge();
+    const text = formatBadgeCount(n);
+    await chrome.action.setBadgeText({ text });
+    if (text) {
+      await chrome.action.setBadgeBackgroundColor({ color: "#2563EB" });
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
+function scheduleTabCountBadgeRefresh() {
+  if (badgeRefreshTimer != null) {
+    clearTimeout(badgeRefreshTimer);
+  }
+  badgeRefreshTimer = setTimeout(() => {
+    badgeRefreshTimer = null;
+    refreshTabCountBadge();
+  }, 120);
+}
+
+chrome.runtime.onInstalled.addListener(() => {
+  refreshTabCountBadge();
+});
+chrome.runtime.onStartup?.addListener(() => {
+  refreshTabCountBadge();
+});
+
+chrome.tabs.onCreated.addListener(scheduleTabCountBadgeRefresh);
+chrome.tabs.onRemoved.addListener(scheduleTabCountBadgeRefresh);
+chrome.tabs.onMoved.addListener(scheduleTabCountBadgeRefresh);
+chrome.tabs.onDetached.addListener(scheduleTabCountBadgeRefresh);
+chrome.tabs.onAttached.addListener(scheduleTabCountBadgeRefresh);
+chrome.tabs.onReplaced.addListener(scheduleTabCountBadgeRefresh);
+chrome.tabs.onUpdated.addListener((_tabId, changeInfo) => {
+  if (changeInfo.status === "complete" || changeInfo.url != null) {
+    scheduleTabCountBadgeRefresh();
+  }
+});
+
+refreshTabCountBadge();
+
 /**
  * @param {string} runId
  */
