@@ -22,6 +22,16 @@
 - **Export** : Save all unique tab links as a `.txt` file.
 - **Organize by category** : Uses Open Graph, JSON-LD, and hostname hints to group tabs; preview layout before moving tabs; large applies run in batches (see `limits.js`).
 
+## Use in Chrome (developer mode)
+
+1. Clone or download this repository so you have **`manifest.json`** at the root of the extension folder (same folder as `popup.html`, `background.js`, and `icons/`).
+2. Open Chrome and go to **`chrome://extensions`**.
+3. Turn **Developer mode** on (top right).
+4. Click **Load unpacked**.
+5. Choose that **folder** (the one containing `manifest.json`). Tabby appears in your extensions list and its icon in the toolbar.
+6. After you change code, open **`chrome://extensions`** again and click **Reload** on Tabby’s card so updates apply.
+
+No build step is required—the extension is plain HTML, CSS, and JavaScript.
 
 ## Privacy
 
