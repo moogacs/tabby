@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Tabby",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Dedupe tabs, export links, and organize by smart category batches.",
   "permissions": ["tabs", "windows", "scripting", "storage"],
   "optional_host_permissions": ["http://*/*", "https://*/*"],
