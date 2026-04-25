@@ -5,6 +5,8 @@
 
 **Tabs, tidied.** A Chrome extension (Manifest V3) for **too many tabs**: dedupe by full URL, export links, and organize tabs into smart category batches with preview and safe limits.
 
+**Install from Chrome Web Store:** [Tabby on the Chrome Web Store](https://chromewebstore.google.com/detail/tabby/hhnhdomcdpohjdkanflncmehfbclbepo)
+
 ## Preview
 
 <p align="center">
@@ -23,6 +25,8 @@
 - **Organize by category** : Uses Open Graph, JSON-LD, and hostname hints to group tabs; preview layout before moving tabs; large applies run in batches (see `limits.js`).
 
 ## Use in Chrome (developer mode)
+
+For the published build, install from the [Chrome Web Store](https://chromewebstore.google.com/detail/tabby/hhnhdomcdpohjdkanflncmehfbclbepo). To run this repo unpacked:
 
 1. Clone or download this repository so you have **`manifest.json`** at the root of the extension folder (same folder as `popup.html`, `background.js`, and `icons/`).
 2. Open Chrome and go to **`chrome://extensions`**.
